@@ -1,7 +1,7 @@
 package gui.account;
 
-import model.validation.Validator;
 import data_base.TransferDB;
+import model.validation.Validator;
 
 import javax.swing.*;
 import java.math.BigDecimal;
@@ -9,7 +9,8 @@ import java.math.BigDecimal;
 import static model.domain.transaction.TransactionType.DEPOSIT;
 
 public class DepositGui {
-    private final static String TITLE = "payment of money";
+    private DepositGui (){}
+    private  static final String TITLE = "payment of money";
 
     public static void createDepositGui(int userId, JLabel labelCash) {
         JFrame frame = new JFrame();
@@ -20,7 +21,7 @@ public class DepositGui {
         JButton confirmButton = new JButton("confirm");
         confirmButton.addActionListener(actionEvent -> {
             Validator validator = new Validator();
-            if (validator.checkCash(depositCashText.getText()) == true) {
+            if (validator.checkCash(depositCashText.getText())) {
                 BigDecimal depositCashDecimal = new BigDecimal(depositCashText.getText());
                 TransferDB transferDB = new TransferDB(userId, userId, DEPOSIT, depositCashDecimal, TITLE);
                 transferDB.createTransfer();

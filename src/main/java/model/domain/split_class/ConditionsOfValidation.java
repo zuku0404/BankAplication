@@ -10,7 +10,7 @@ public class ConditionsOfValidation {
             return "login is too short, must be at least 8 characters long or does not contain uppercase";
         }
         return "";
-    }
+}
 
     public String checkPassword(String password) {
         if (!validator.checkPassword(password)) {

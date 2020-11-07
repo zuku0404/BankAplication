@@ -33,7 +33,6 @@ public class SignUpGui  {
         errorPassword.setForeground(Color.RED);
         errorPassword.setOpaque(false);
 
-
         JLabel nameLabel = new JLabel("Name: ");
         JTextField nameText = new JTextField(25);
         JTextArea errorName = new JTextArea("",2,40);
@@ -73,10 +72,6 @@ public class SignUpGui  {
                 errorLogin,errorPassword,errorName,errorSurname,errorDateOfBirth,errorPesel);
             converter.createAccountOrShowError();
         });
-//
-//        createAccount.addActionListener(new UsersCreator(loginText, passwordText, peselText, dateOfBirthText, nameText, surnameText,
-//                errorLogin,errorPassword,errorName,errorSurname,errorDateOfBirth,errorPesel));
-
         panel.setLayout(new GridLayout(0, 1));
 
         JPanel firstPanel = new JPanel();

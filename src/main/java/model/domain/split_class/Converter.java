@@ -1,7 +1,7 @@
 package model.domain.split_class;
 
 import javax.swing.*;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Converter {
     private JTextField login;
@@ -37,9 +37,8 @@ public class Converter {
 
     public void createAccountOrShowError() {
         CorrectnessUserDataChecker user = new CorrectnessUserDataChecker(login.getText(), password.getText(), pesel.getText(), dateOfBirth.getText(),
-                name.getText(), surname.getText(), errorLogin.getText(), errorPassword.getText(), errorName.getText(),
-                errorSurname.getText(), errorDateOfBirth.getText(), errorPesel.getText());
-        ArrayList<String> textSetter = user.checkValidationData();
+                name.getText(), surname.getText());
+        List<String> textSetter = user.checkValidationData();
 
         errorLogin.setText(textSetter.get(0));
         errorPassword.setText(textSetter.get(1));

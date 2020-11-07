@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CaesarDecipher {
+    private CaesarDecipher (){}
     public static String decryptPassword(String encryptedPassword) {
-        String decryptedPassword = "";
+        StringBuilder sb = new StringBuilder();
         int numberOffsetLetters = 10;
         List<Character> listOfLettersInDecryptedPass = new ArrayList<>();
 
@@ -18,10 +19,9 @@ public class CaesarDecipher {
                 listOfLettersInDecryptedPass.add(letter);
             }
         }
-        for (
-                Character a : listOfLettersInDecryptedPass) {
-            decryptedPassword += a;
+        for (Character a : listOfLettersInDecryptedPass) {
+            sb.append(a);
         }
-        return decryptedPassword;
+        return sb.toString();
     }
 }

@@ -1,9 +1,9 @@
 package gui.account;
 
-import model.validation.Validator;
+import data_base.TransferDB;
 import model.domain.transaction.TransactionChecker;
 import model.domain.transaction.TransactionType;
-import data_base.TransferDB;
+import model.validation.Validator;
 
 import javax.swing.*;
 import java.math.BigDecimal;
@@ -12,7 +12,7 @@ import java.util.Optional;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class TransferGui {
-    private final static String OPERATION_TYPE = "transfer";
+    private TransferGui(){}
 
     public static void createTransferGui(BigDecimal allCashOnAccount, int userId, JLabel labelCash) {
         JFrame frame = new JFrame();

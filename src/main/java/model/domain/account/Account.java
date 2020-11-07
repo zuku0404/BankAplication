@@ -9,12 +9,6 @@ public class Account {
         this.cash = cash;
     }
 
-    public void depositCash() {
-    }
-
-    public void withdrawCash() {
-    }
-
     public String getNumber() {
         return number;
     }

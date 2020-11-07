@@ -11,15 +11,15 @@ public class Validator {
         return matcher.matches();
     }
     public boolean checkTitle (String title) {
-        String regex = ".+";
+        String regex = "\\S(.*)";
         return Pattern.matches(regex,title);
     }
     public boolean checkIdUserRecipient (String idUserRecipient) {
-        String regex = "^\\d+$";
+        String regex = "^[1-9](\\d*$)";
         return Pattern.matches(regex,idUserRecipient);
     }
     public boolean checkPassword (String password){
-        String regex = "^(?=.*?[A-Z])(?=.*?\\d)(?=.*?[a-z])(?=.*[$@$!%*?&.])\\S{8,}";
+        String regex = "^(?=.*?[A-Z])(?=.*?\\d)(?=.*?[a-z])(?=.*[$@!%*?&.])\\S{8,}";
         return Pattern.matches(regex,password);
     }
     public boolean checkLogin (String login) {
@@ -31,7 +31,7 @@ public class Validator {
         return Pattern.matches(regex, word);
     }
     public boolean checkDataOfBirth (String birth){
-        String regex = "^\\d{2}-\\d{2}-\\d{4}$";
+        String regex = "^[0-3][0-9]-[0-3][0-9]-[1-2][0-9]{3}$";
         return Pattern.matches(regex, birth);
     }
     public boolean checkPesel (String pesel) {

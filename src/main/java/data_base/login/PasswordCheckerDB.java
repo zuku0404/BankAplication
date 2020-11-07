@@ -1,16 +1,20 @@
 package data_base.login;
 
-import model.cipher.CaesarDecipher;
 import data_base.ConnectionUtil;
+import model.cipher.CaesarDecipher;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class PasswordCheckerDB {
     public boolean checkPassword(String login, String password) {
         String downloadPassword = "SELECT PASSWORD FROM ACCOUNT JOIN USERS ON Users.ID = model.account.ID WHERE Users.login = ? ";
         Connection connection = ConnectionUtil.createConnection();
+        PreparedStatement ps = null;
         try {
-            PreparedStatement ps = connection.prepareStatement(downloadPassword);
+            ps = connection.prepareStatement(downloadPassword);
             ps.setString(1,login);
             ResultSet rs = ps.executeQuery();
             rs.next();
@@ -20,12 +24,17 @@ public class PasswordCheckerDB {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
+            }
+            try {
+                if (ps != null) {
+                    ps.close();
                 }
+            } catch (SQLException sqlexp) {
+                sqlexp.printStackTrace();
             }
         }
         return false;

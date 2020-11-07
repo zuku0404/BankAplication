@@ -7,6 +7,7 @@ import gui.account.AccountGui;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 
 // nie wiem czy tak może być ze zwraca id lub 0 pozniej w drugiej funkcji znowu to sprawdza  !!!!!
@@ -27,14 +28,16 @@ public class UserLogPasChecker implements ActionListener {
         }
     }
     private int checkAccount() {
+        Logger logger = Logger.getLogger(UserLogPasChecker.class.getName());
         LoginCheckerDB loginCheckerDB = new LoginCheckerDB();
         PasswordCheckerDB passwordCheckerDB = new PasswordCheckerDB();
         int id = loginCheckerDB.checkLogin(login.getText());
+
         if (id == 0) {
-            System.out.println("login not exist");
+            logger.info("login not exist");
             return 0;
         } else if (!passwordCheckerDB.checkPassword(login.getText(), password.getText())) {
-            System.out.println("password incorrect");
+            logger.info("password incorrect");
             return 0;
         } else
             return id;

@@ -1,7 +1,7 @@
 package data_base.account_information;
 
-import model.domain.transaction.Transfer;
 import data_base.ConnectionUtil;
+import model.domain.transaction.Transfer;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -16,8 +16,9 @@ public class AccountInformationFetcher {
         String numberAccount = "";
         String query = "Select * from USERS where ID = ?";
         Connection connect = ConnectionUtil.createConnection();
+        PreparedStatement ps = null;
         try {
-            PreparedStatement ps = connect.prepareStatement(query);
+            ps = connect.prepareStatement(query);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             rs.next();
@@ -25,40 +26,52 @@ public class AccountInformationFetcher {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
-        finally {
-            if (connect!=null){
-                try {
-                    connect.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+        } finally {
+            try {
+                connect.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (ps != null) {
+                    ps.close();
                 }
+            } catch (SQLException sqlexp) {
+                sqlexp.printStackTrace();
             }
         }
         return numberAccount;
     }
+
     public BigDecimal getCurrentCash(int id) {
         String query = "SELECT SUM(TRANSFER_CASH) FROM TRANSFER Where id_user = ?";
         Connection connect = ConnectionUtil.createConnection();
+        PreparedStatement ps = null;
         try {
-            PreparedStatement ps = connect.prepareStatement(query);
+            ps = connect.prepareStatement(query);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             rs.next();
             return rs.getBigDecimal("SUM(TRANSFER_CASH)");
         } catch (Exception ex) {
             ex.printStackTrace();
-            return BigDecimal.ZERO; // TODO  tu trzeba obsluzyc wyjatek nie wiem zbytnio jak to zrobic !!
+            return BigDecimal.ZERO;
         } finally {
-            if (connect != null) {
-                try {
-                    connect.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+            try {
+                connect.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (ps != null) {
+                    ps.close();
                 }
+            } catch (SQLException sqlexp) {
+                sqlexp.printStackTrace();
             }
         }
     }
+
     public List<Transfer> getHistory(int userId) {
         List<Transfer> historyUserList = new ArrayList<>();
         String query2 = "SELECT name_mod.name  Name_Owner, surname_modi.surname Surname_owner , name_mod2.name NAME_RECIPIENT ," +
@@ -71,8 +84,9 @@ public class AccountInformationFetcher {
                 " WHERE ID_USER = ? " +
                 " ORDER BY ID_TRANSFER DESC";
         Connection connect = ConnectionUtil.createConnection();
+        PreparedStatement ps = null;
         try {
-            PreparedStatement ps = connect.prepareStatement(query2);
+            ps = connect.prepareStatement(query2);
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) { // (&& historyUserList.size() < 20)
@@ -90,12 +104,17 @@ public class AccountInformationFetcher {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (connect != null) {
-                try {
-                    connect.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+            try {
+                connect.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (ps != null) {
+                    ps.close();
                 }
+            } catch (SQLException sqlexp) {
+                sqlexp.printStackTrace();
             }
         }
         return historyUserList;

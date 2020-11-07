@@ -6,6 +6,8 @@ import model.domain.userLog.UserLogPasChecker;
 import javax.swing.*;
 
 public class LoginGui {
+
+    private LoginGui(){}
     public static void createLoginGui() {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

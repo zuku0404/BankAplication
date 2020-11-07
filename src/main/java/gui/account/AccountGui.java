@@ -35,7 +35,6 @@ public class AccountGui {
                     HistoryGui gui = new HistoryGui(id);
                     gui.createTable();
                 });
-//        checkTransferHistoryButton.addActionListener(actionEvent -> HistoryGui.createTable(id));
 
         mainPanel.add(cashOnAccount);
         mainPanel.add(cash);

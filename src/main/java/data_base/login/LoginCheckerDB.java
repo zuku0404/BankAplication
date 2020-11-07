@@ -11,8 +11,9 @@ public class LoginCheckerDB {
     public int checkLogin(String login) {
         String downloadLogs = " SELECT id from users WHERE login = ? ";
         Connection connection = ConnectionUtil.createConnection();
+        PreparedStatement ps = null;
         try {
-            PreparedStatement ps = connection.prepareStatement(downloadLogs);
+            ps = connection.prepareStatement(downloadLogs);
             ps.setString(1, login);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -21,12 +22,17 @@ public class LoginCheckerDB {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
+            }
+            try {
+                if (ps != null) {
+                    ps.close();
                 }
+            } catch (SQLException sqlexp) {
+                sqlexp.printStackTrace();
             }
         }
         return 0;
