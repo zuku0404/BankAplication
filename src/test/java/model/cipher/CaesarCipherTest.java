@@ -8,6 +8,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 class CaesarCipherTest {
+
+
     @ParameterizedTest
     @MethodSource("data")
     void encryptPassword_nonEncryptedInput_encryptedOutput (String password, String expectedResult){

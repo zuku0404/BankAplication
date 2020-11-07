@@ -1,14 +1,15 @@
 package gui.login;
 
+import gui.Gui;
 import gui.register.SignUpGui;
 import model.domain.userLog.UserLogPasChecker;
 
 import javax.swing.*;
 
-public class LoginGui {
+public class LoginGui implements Gui {
 
-    private LoginGui(){}
-    public static void createLoginGui() {
+    @Override
+    public void show() {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         JPanel mainPanel = new JPanel();
@@ -22,7 +23,7 @@ public class LoginGui {
         userCreatorButton.addActionListener(actionEvent -> SignUpGui.createGui());
 
         JButton loginButton = new JButton("Sign in");
-        loginButton.addActionListener(new UserLogPasChecker(loginField,passwordField));
+        loginButton.addActionListener(new UserLogPasChecker(loginField, passwordField));
 
         frame.getContentPane().add(mainPanel);
         mainPanel.add(loginLabel);
