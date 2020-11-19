@@ -2,19 +2,18 @@ package data_base;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.Properties;
 
 public class ConnectionUtil {
+    private static final String DRIVER = "org.h2.Driver";
+    private static final String URL = "jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'file:tablesAndData.sql'";
+    private static final String USER = "sa";
+    private static final String PASSWORD = "";
 
     public static Connection createConnection() {
-        String url = "jdbc:h2:~/aplikaBankowaa";
         Connection connection = null;
-        Properties properties = new Properties();
-        properties.setProperty("user", "sa");
-        properties.setProperty("password", "");
         try {
-//            Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection(url, properties);
+            Class.forName(DRIVER);
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
